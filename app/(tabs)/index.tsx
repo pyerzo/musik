@@ -10,7 +10,7 @@ import { VStack } from "@/components/ui/vstack";
 import { Tracks } from "@/constants/Tracks";
 import { useTrackControl } from "@/hooks/useTrackControl";
 import { getProgressValue, getTimeLabel } from "@/utils/player";
-import { CircleChevronLeft, CircleChevronRight, CirclePause, CirclePlay, ListMusic, Shuffle } from "lucide-react-native";
+import { CircleChevronLeft, CircleChevronRight, CirclePause, CirclePlay, ListMusic, Shuffle, SkipBack, SkipForward } from "lucide-react-native";
 import { useEffect } from "react";
 import { Pressable } from "react-native";
 import TrackPlayer, { useProgress, useActiveTrack, useIsPlaying } from "react-native-track-player";
@@ -52,10 +52,10 @@ export default function Index() {
         </VStack>
         <Box>
           <HStack className="items-center justify-between">
-            <Shuffle size={30} absoluteStrokeWidth/>
+            <Shuffle size={25} absoluteStrokeWidth/>
             <HStack className="items-center" space="lg">
               <Pressable disabled={!control.previous} onPress={goPrevious}>
-                <CircleChevronLeft size={40} absoluteStrokeWidth style={{opacity: control.previous ? 1 : 0.5}} />
+                <SkipBack size={35} opacity={control.previous ? 1 : 0.5} absoluteStrokeWidth/>
               </Pressable>
               <Pressable onPress={() => playing ? TrackPlayer.pause() : TrackPlayer.play()}>
                 {playing ? 
@@ -64,7 +64,7 @@ export default function Index() {
                 }
               </Pressable>
               <Pressable disabled={!control.next} onPress={goNext}>
-                <CircleChevronRight size={40} absoluteStrokeWidth style={{opacity: control.next ? 1 : 0.5}} />
+                <SkipForward size={35 } opacity={control.next ? 1 : 0.5} absoluteStrokeWidth />
               </Pressable>
             </HStack>
             <ListMusic size={30} absoluteStrokeWidth/>
