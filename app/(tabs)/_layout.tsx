@@ -1,14 +1,15 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { Disc3, Settings, SquareLibrary } from 'lucide-react-native';
-import { Pressable } from 'react-native';
+import PressableIcon from '@/components/ui/PressableIcon';
+import Icon from '@/components/ui/Icon';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+
+  const getIconOpacity = (focused: boolean) => focused ? 1 : 0.5
 
   return (
     <Tabs
@@ -22,7 +23,12 @@ export default function TabLayout() {
           tabBarShowLabel: false,
           headerShown: false,
           tabBarIcon: ({ color, focused }) => (
-            <Disc3 opacity={focused ? 1 : 0.5} size="xl" color={color}/>
+            <Icon
+              icon={Disc3}
+              opacity={getIconOpacity(focused)}
+              // size=""
+              color={color} 
+            />  
           ),
         }}
       />
@@ -32,15 +38,18 @@ export default function TabLayout() {
           title: 'Library',
           tabBarShowLabel: false,
           headerRight: () => (
-            <Pressable style={{marginRight: 15}}>
-              <Settings />
-            </Pressable>
-          ),
-          headerLeft: () => (
-            <SquareLibrary style={{marginLeft: 20}}/>
+            <PressableIcon
+              icon={Settings}
+              style={{marginRight: 15}}
+            />
           ),
           tabBarIcon: ({ color, focused }) => (
-            <SquareLibrary opacity={focused ? 1 : 0.5} size="lg" color={color}/>
+            <Icon
+              icon={SquareLibrary}
+              opacity={getIconOpacity(focused)}
+              // size="xl"
+              color={color} 
+            />            
           ),
         }}
       />
